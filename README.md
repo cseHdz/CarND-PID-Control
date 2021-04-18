@@ -23,7 +23,7 @@ The PID controller is comprised of 3 parameters with different effects on the mo
 ### 1. Proportional (P):
 The proportional parameter in the controller determines to which extent should the direction change respective to the cross-track-error (CTE). Given the direct relationship, it has the potential for agressive behaviour if the parameter is set too high.
 
-After manual tunning, I selected the value of 0.11. Any range between 0.11 and 0.2 worked fine, but I observed a lot more overshooting as I increased the value.
+After manual tunning, I selected the value of 0.14. Any range between 0.11 and 0.2 worked fine, but I observed a lot more overshooting as I increased the value.
 
 ## 2. Integral
 The integral parameter in the controller adjusts in proportion to the running sum of cross-track-error during all iterations. It's purpose is to ensure that the CTE is decreasing in the long term and stabilizes.
@@ -34,7 +34,7 @@ After manual tunning, I selected the value of 0.0001. We have to be specially ca
 ## 3. Differential (D):
 The differential parameter in the controller adjusts in proportion to changes in CTE. Given that the rate of change is smaller than the error after the initial iteration, this parameter is a lot more useful in decreasing oscillations.
 
-After manual tunning, I selected the value of 4.0. Since this is intending to reduce the rate of change, it has to be setup a lot more aggresively (magnitude will decrease significanlty as CTE decreases between iterations).
+After manual tunning, I selected the value of 2.0. Since this is intending to reduce the rate of change, it has to be setup a lot more aggresively (magnitude will decrease significanlty as CTE decreases between iterations).
 
 ## Cross-TRack-Error
 In order to calculate cross-track-error, I used the following equation:
