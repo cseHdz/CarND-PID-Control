@@ -40,6 +40,7 @@ After manual tunning, I selected the value of 2.0. Since this is intending to re
 In order to calculate cross-track-error, I used the following equation:
 
 CTE = - Kp * CTE - Kd * (CTE - CTE@t-1) - Ki * (Σ CTE)
+
 CTE = - Kp * p_error - Kd * d_error - Ki * i_error
 
 
