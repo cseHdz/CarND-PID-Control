@@ -9,6 +9,9 @@
 using nlohmann::json;
 using std::string;
 
+using std::min;
+using std::max;
+
 // For converting back and forth between radians and degrees.
 constexpr double pi() { return M_PI; }
 double deg2rad(double x) { return x * pi() / 180; }
@@ -35,8 +38,15 @@ int main() {
 
   PID pid;
   /**
-   * TODO: Initialize the pid variable.
+   * Initialize the pid variable.
    */
+  double p_errors = [0.0, 0.01, 0.11, 0.2];
+  double d_errors = [0.0, 0.0001, 0.1, 0.2];
+  double i_errors = [0.0, 1.0 , 3.0 , 4.0];
+  
+  pid.Init(p_errors[2], 
+           d_errors[1],
+           i_errors[3);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
@@ -54,16 +64,22 @@ int main() {
         if (event == "telemetry") {
           // j[1] is the data JSON object
           double cte = std::stod(j[1]["cte"].get<string>());
-          double speed = std::stod(j[1]["speed"].get<string>());
-          double angle = std::stod(j[1]["steering_angle"].get<string>());
+//           double speed = std::stod(j[1]["speed"].get<string>());
+//           double angle = std::stod(j[1]["steering_angle"].get<string>());
           
-          double steer_value = pid.TotalError();
           /**
-           * TODO: Calculate steering value here, remember the steering value is
+           * Calculate steering value here, remember the steering value is
            *   [-1, 1].
            * NOTE: Feel free to play around with the throttle and speed.
            *   Maybe use another PID controller to control the speed!
            */
+          
+          // Update errors
+          pid.UpdateError(cte);
+          double steer_value = pid.TotalError();
+          
+          // Ensure Steer Value stays within [-1,1]
+          steer_value = min(max(steer_value, -1.0),1.0);          
           
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
