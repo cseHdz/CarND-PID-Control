@@ -41,13 +41,13 @@ int main() {
    * Initialize the pid variable.
    */
   double p_errors = [0.0, 0.01, 0.11, 0.2];
-  double d_errors = [0.0, 0.0001, 0.1, 0.2];
-  double i_errors = [0.0, 1.0 , 3.0 , 4.0];
+  double i_errors = [0.0, 0.0001, 0.1, 0.2];
+  double d_errors = [0.0, 1.0 , 3.0 , 4.0];
   
   // Final Selection of Errors
   pid.Init(p_errors[2], 
-           d_errors[1],
-           i_errors[3);
+           i_errors[1],
+           d_errors[3]);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
