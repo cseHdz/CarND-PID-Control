@@ -44,6 +44,7 @@ int main() {
   double d_errors = [0.0, 0.0001, 0.1, 0.2];
   double i_errors = [0.0, 1.0 , 3.0 , 4.0];
   
+  // Final Selection of Errors
   pid.Init(p_errors[2], 
            d_errors[1],
            i_errors[3);
